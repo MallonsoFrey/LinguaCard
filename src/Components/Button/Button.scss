@@ -1,0 +1,45 @@
+@use "../../styles/vars.scss" as *;
+
+button {
+    border: none;
+    margin: 0.2em;
+    padding: 0.2em;
+    border-radius: 5px;
+    box-shadow: 2px 2px #030303;
+
+    &:active {
+        transform: translateY(2px);
+    }
+
+    &.edit-btn {
+        background-color: $edit-btn;
+
+        &:hover {
+            background-color: $edit-btn-hover;
+        }
+    }
+    
+    &.delete-btn {
+        background-color: $delete-btn;
+
+        &:hover {
+            background-color: $delete-btn-hover;
+        }
+    }
+    
+    &.save-btn {
+        background-color: $save-btn;
+
+        &:hover {
+            background-color: $save-btn-hover;
+        }
+    }
+    
+    &.cancel-btn {
+        background-color: $cancel-btn;
+
+        &:hover {
+            background-color: $cancel-btn-hover;
+        }
+    }
+}

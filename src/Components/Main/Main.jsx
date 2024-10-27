@@ -1,7 +1,18 @@
+import CardAll from "../CardAll/CardAll";
+import "./Main.scss";
+
 function Main() {
   return (
     <>
-      <main>That is main</main>
+      <table>
+        <tr className="top-row">
+          <th>#</th>
+          <th>СЛОВО</th>
+          <th>ПЕРЕВОД</th>
+          <th></th>
+        </tr>
+        <CardAll />
+      </table>
     </>
   );
 }

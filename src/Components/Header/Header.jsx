@@ -1,7 +1,9 @@
+import "./Header.scss";
+
 function Header() {
   return (
     <>
-      <header>That is header</header>
+      <header className="header">Let&apos;s learn new words!</header>
     </>
   );
 }
