@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 
-function Button({ text, className }) {
+function Button({ text, className, onClick }) {
   return (
     <>
-      <button className={className} type="button">
+      <button className={className} onClick={onClick} type="button">
         {text}
       </button>
     </>
