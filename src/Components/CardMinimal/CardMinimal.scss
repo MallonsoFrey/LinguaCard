@@ -1,0 +1,18 @@
+
+.cardMinimal-container {
+    display: flex;
+    align-items: center;
+
+    .cardMinimal {
+        width: 300px;
+        height: 400px;
+        background-color: cadetblue;
+        margin: 1em;
+        border-radius: 7px;
+    
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

@@ -1,4 +1,5 @@
 import CardAll from "../CardAll/CardAll";
+import CardMinimalAll from "../CardMinimalAll/CardMinimalAll";
 import "./Main.scss";
 
 function Main() {
@@ -13,6 +14,7 @@ function Main() {
         </tr>
         <CardAll />
       </table>
+      <CardMinimalAll />
     </>
   );
 }
