@@ -1,0 +1,13 @@
+table, tr, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table {
+    width: 60%;
+    height: 30%;
+
+    .top-row {
+        background-color: rgb(80, 80, 226);
+    }
+}

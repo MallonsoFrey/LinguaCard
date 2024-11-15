@@ -2,6 +2,17 @@
     color: rgb(0, 21, 0);
     font-weight: 700;
     font-size: 2em;
-    padding: 1em;
     margin: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+
+    .logo {
+        width: 2em;
+
+        img {
+            width: 100%;
+        }
+    }
 }
