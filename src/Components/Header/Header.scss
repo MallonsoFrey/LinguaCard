@@ -1,12 +1,13 @@
 .header {
-    color: rgb(0, 21, 0);
-    font-weight: 700;
+    color: white;
+    font-weight: 400;
     font-size: 2em;
-    margin: 0.5em;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: sticky;
+    position: fixed;
+    width: 100%;
+    background-color: rgb(36, 59, 60);
 
     .logo {
         width: 2em;
