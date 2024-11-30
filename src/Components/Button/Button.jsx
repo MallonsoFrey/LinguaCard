@@ -1,13 +1,12 @@
 /* eslint-disable react/prop-types */
+import { forwardRef } from "react";
 
-function Button({ text, className, onClick }) {
+const Button = forwardRef(function Button({ text, className, onClick }, ref) {
   return (
-    <>
-      <button className={className} onClick={onClick} type="button">
-        {text}
-      </button>
-    </>
+    <button ref={ref} className={className} onClick={onClick} type="button">
+      {text}
+    </button>
   );
-}
+});
 
 export default Button;

@@ -50,6 +50,11 @@ button {
         &:hover {
             background-color: rgb(50, 75, 86);
         }
+
+        &:focus {
+            outline: 3px solid rgb(50, 75, 86); /* обводка */
+            box-shadow: 0 0 5px rgb(50, 75, 86); /* Лёгкое свечение */
+        }
     }
 
     &.round {
