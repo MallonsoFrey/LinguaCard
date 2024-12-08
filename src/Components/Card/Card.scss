@@ -6,4 +6,8 @@ input[type=text] {
     border: none;
     background-color: rgb(131, 209, 213);
     border-bottom: 2px solid rgb(4, 0, 38);
+
+    &.error {
+        border: 2px solid red;
+    }      
 }
