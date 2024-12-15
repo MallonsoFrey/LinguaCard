@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
 import { createContext, useState, useEffect } from "react";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 const DataContext = createContext();
 
 function DataContextProvider({ children }) {
-  const [words, setWords] = useState([]);
+  const [words, setWords] = useState([]); // Состояние для слов
+  const [error, setError] = useState(null); // Состояние для ошибки
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,12 +20,15 @@ function DataContextProvider({ children }) {
         const data = await response.json();
         setWords(data);
       } catch (error) {
-        console.log(error.message);
+        setError(error.message);
       }
     };
 
     fetchData();
   }, []);
+
+  // Отображаем компонент с ошибкой, если есть ошибка
+  if (error) return <ErrorMessage message={error} />;
 
   return (
     <DataContext.Provider value={{ words, setWords }}>

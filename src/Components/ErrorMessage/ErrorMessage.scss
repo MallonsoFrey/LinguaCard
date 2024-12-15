@@ -1,0 +1,18 @@
+.error-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12%;
+    
+    .error-img {
+    max-width: 300px; // Фиксированная ширина
+    width: 100%;
+    
+        img {
+            width: 100%;
+            height: auto; // Сохраняет пропорции
+            display: block;
+        }
+    }
+}
