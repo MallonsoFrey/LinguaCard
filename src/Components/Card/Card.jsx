@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import Button from "../Button/Button";
 import "../Button/Button.scss";
 import "./Card.scss";
+import { DataContext } from "../DataContextProvider/DataContextProvider";
 
-function Card({ word, translation, index, id, deleteWord, updateWords }) {
+function Card({ word, translation, index, id, deleteWord }) {
+  const { serverDataChange } = useContext(DataContext);
   const [hiddenTranslation, setHiddenTranslation] = useState(true);
   const [isForEdit, setIsForEdit] = useState(false);
   const [inputWord, setInputWord] = useState(word);
@@ -31,21 +33,22 @@ function Card({ word, translation, index, id, deleteWord, updateWords }) {
 
     try {
       setIsLoading(true);
-      const res = await fetch(
-        `http://itgirlschool.justmakeit.ru/api/words/${id}`,
-        {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            english: inputWord,
-            russian: inputTranslation,
-          }),
-        }
-      );
+      const res = await fetch(`/api/words/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          english: inputWord,
+          russian: inputTranslation,
+        }),
+      });
       if (!res.ok) throw new Error(`HTTP Error: ${res.status}`);
 
       const updatedWord = await res.json();
-      updateWords(updatedWord); // Обновляем данные в родителе
+      if (updatedWord) {
+        console.log(inputTranslation);
+        console.log(updatedWord);
+        serverDataChange();
+      }
       setIsForEdit(false);
     } catch (error) {
       console.error(`Ошибка сохранения: ${error.message}`);

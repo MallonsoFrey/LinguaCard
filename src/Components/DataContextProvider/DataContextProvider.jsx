@@ -7,13 +7,16 @@ const DataContext = createContext();
 function DataContextProvider({ children }) {
   const [words, setWords] = useState([]); // Состояние для слов
   const [error, setError] = useState(null); // Состояние для ошибки
+  const [dataChange, setDataChange] = useState(true);
+
+  const serverDataChange = () => {
+    setDataChange(!dataChange);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "http://itgirlschool.justmakeit.ru/api/words"
-        );
+        const response = await fetch("/api/words", { cache: "no-store" });
         if (!response.ok) {
           throw new Error(`HTTP Error! Status: ${response.status}`);
         }
@@ -25,13 +28,14 @@ function DataContextProvider({ children }) {
     };
 
     fetchData();
-  }, []);
+  }, [dataChange]);
 
-  // Отображаем компонент с ошибкой, если есть ошибка
   if (error) return <ErrorMessage message={error} />;
 
   return (
-    <DataContext.Provider value={{ words, setWords }}>
+    <DataContext.Provider
+      value={{ words, setWords, serverDataChange, dataChange }}
+    >
       {children}
     </DataContext.Provider>
   );
