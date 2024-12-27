@@ -43,6 +43,16 @@ button {
         }
     }
 
+    &.add-btn {
+        width: 5em;
+        height: 3em;
+        background-color: $cancel-btn;
+
+        &:hover {
+            background-color: $cancel-btn-hover;
+        }
+    }
+
     &.show-btn {
         border-radius: 20px;
         background-color: rgb(86, 131, 182);

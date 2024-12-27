@@ -14,7 +14,9 @@ export default function CardAll() {
 
   const deleteWord = async (id) => {
     try {
-      const response = await fetch(`/api/words/${id}`, { method: "DELETE" });
+      const response = await fetch(`/api/words/${id}/delete`, {
+        method: "POST",
+      });
       if (!response.ok)
         throw new Error(`Ошибка при удалении: ${response.status}`);
 
@@ -31,11 +33,12 @@ export default function CardAll() {
 
   return (
     <>
-      {words.map(({ english, russian, id }, index) => (
+      {words.map(({ english, russian, id, transcription }, index) => (
         <Card
           index={index}
           key={id}
           word={english}
+          transcription={transcription}
           translation={russian}
           id={id}
           deleteWord={deleteWord}

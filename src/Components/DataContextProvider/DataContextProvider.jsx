@@ -33,9 +33,7 @@ function DataContextProvider({ children }) {
   if (error) return <ErrorMessage message={error} />;
 
   return (
-    <DataContext.Provider
-      value={{ words, setWords, serverDataChange, dataChange }}
-    >
+    <DataContext.Provider value={{ words, setWords, serverDataChange }}>
       {children}
     </DataContext.Provider>
   );
