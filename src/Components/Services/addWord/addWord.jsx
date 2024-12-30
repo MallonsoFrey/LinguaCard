@@ -1,9 +1,9 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Button from "../../Button/Button";
-import { DataContext } from "../../DataContextProvider/DataContextProvider";
+import { observer } from "mobx-react-lite";
+import { dataMobXContext } from "../../DataMobXContext/DataMobXContext";
 
-export default function AddWord() {
-  const { serverDataChange } = useContext(DataContext);
+const AddWord = observer(() => {
   const [data, setData] = useState({
     id: "",
     english: "",
@@ -12,7 +12,6 @@ export default function AddWord() {
     tags: "",
     tags_json: "[]",
   });
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,31 +22,9 @@ export default function AddWord() {
     setData({ ...data, english: "", transcription: "", russian: "" });
   };
 
-  const addToServer = async (e) => {
-    e.preventDefault();
-    if (!data.english || !data.russian) return;
-    setIsLoading(true); //HERE????????????
-
-    try {
-      const res = await fetch("/api/words/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      clearInputs();
-
-      if (!res.ok) throw new Error(`HTTP error occured: ${res.status}`);
-      const addedWord = await res.json(); //если удалось, то преобразуем ответ сервера в json
-      if (addedWord) {
-        serverDataChange(); //меняем флаг в элементе контекста, чтобы локально слова тоже поменялись
-      }
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
+  const addNewWord = (data) => {
+    clearInputs();
+    dataMobXContext.addToServer(data);
   };
 
   return (
@@ -83,10 +60,16 @@ export default function AddWord() {
         />
       </label>
       <Button
-        text={isLoading ? "Adding..." : "Add"}
+        text={dataMobXContext.isLoading ? "Adding..." : "Add"}
         className="add-btn"
-        onClick={addToServer}
+        onClick={(e) => {
+          e.preventDefault();
+          console.log(data);
+          addNewWord(data);
+        }}
       />
     </form>
   );
-}
+});
+
+export default AddWord;

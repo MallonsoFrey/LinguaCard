@@ -1,33 +1,10 @@
-import { useState, useContext } from "react";
-import { DataContext } from "../DataContextProvider/DataContextProvider";
+import { dataMobXContext } from "../DataMobXContext/DataMobXContext";
+import { observer } from "mobx-react-lite";
 import Card from "../Card/Card";
 
-export default function CardAll() {
-  const { words, serverDataChange } = useContext(DataContext);
-  const [error, setError] = useState("");
-
-  //const updateWords = (updatedWord) => {
-  //  setWords((prevWords) =>
-  //    prevWords.map((word) => (word.id === updatedWord.id ? updatedWord : word))
-  //  );
-  //};
-
-  const deleteWord = async (id) => {
-    try {
-      const response = await fetch(`/api/words/${id}/delete`, {
-        method: "POST",
-      });
-      if (!response.ok)
-        throw new Error(`Ошибка при удалении: ${response.status}`);
-
-      serverDataChange();
-      //setWords((prevWords) => prevWords.filter((word) => word.id !== id));
-    } catch (error) {
-      console.log("Ошибка удаления:", error.message);
-      const err = error.message;
-      setError(err);
-    }
-  };
+const CardAll = observer(() => {
+  const words = dataMobXContext.words;
+  const error = dataMobXContext.deleteWord.error;
 
   if (error) return <p>Error: {error}</p>;
 
@@ -41,10 +18,11 @@ export default function CardAll() {
           transcription={transcription}
           translation={russian}
           id={id}
-          deleteWord={deleteWord}
-          //updateWords={updateWords}
+          deleteWord={dataMobXContext.deleteWord}
         />
       ))}
     </>
   );
-}
+});
+
+export default CardAll;

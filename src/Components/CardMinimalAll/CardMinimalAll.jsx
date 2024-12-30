@@ -1,10 +1,10 @@
 import CardMinimal from "../CardMinimal/CardMinimal";
-import { useState, useContext } from "react";
-import { DataContext } from "../DataContextProvider/DataContextProvider";
+import { useState } from "react";
+import { dataMobXContext } from "../DataMobXContext/DataMobXContext";
 import "./CardMinimalAll.scss";
 
 function CardMinimalAll() {
-  const { words } = useContext(DataContext);
+  const words = dataMobXContext.words;
   const [currentIndex, setCurrentIndex] = useState(0); // Для перелистывания карточек
   const [wordsLearned, setWordsLearned] = useState(0); // Для подсчета изученных слов
   const [hiddenTranslation, setHiddenTranslation] = useState(true); // Состояние для показа перевода
